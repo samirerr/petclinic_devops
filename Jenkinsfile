@@ -1,18 +1,18 @@
 import groovy.json.JsonSlurper
 pipeline {
 	environment {
-    	dburl ="petclinic-server.mysql.database.azure.com"
-    	dbusername ="petclinic"
-    	dbpassword ="Groupe123"
+    	dburl="petclinic-server.mysql.database.azure.com"
+    	dbusername="petclinic"
+    	dbpassword="Groupe123"
         dockerImage = "petclinic-img"
-        containerImage ="petclinic"
+        containerImage="petclinic"
         Url_registre = "petclinic4acr.azurecr.io"
-        Url_sonarqube ="http://192.168.1.101:9000"
-        Sonar_login ="admin"
-        Sonar_password ="samir"
-        Acr_servername ="petclinic4acr.azurecr.io"
-        Acr_user ="petclinic4acr"
-        Acr_password ="JdUC9htdPChYFutybvKSW=4v9eht90Dz"
+        Url_sonarqube="http://192.168.1.101:9000"
+        Sonar_login="admin"
+        Sonar_password="samir"
+        Acr_servername="petclinic4acr.azurecr.io"
+        Acr_user="petclinic4acr"
+        Acr_password="JdUC9htdPChYFutybvKSW=4v9eht90Dz"
         
 	}
 		
@@ -32,7 +32,7 @@ pipeline {
 				 agent any
 					steps {
 						 script {
-							 sh 'mvn clean package -DskipTests -Ddburl=$dburl -Ddbusername=$dbusername -Ddbpassword=$dbpassword'
+							 sh 'mvn clean deploy -DskipTests -Ddburl=$dburl -Ddbusername=$dbusername -Ddbpassword=$dbpassword'
 							}
 						}
 			}
@@ -49,9 +49,8 @@ pipeline {
 				 agent any
 					steps {
 						 script {
-							 sh 'mkdir -p report'
-							 sh'rm -rf ./report/* resultats.jtl'
-							 sh '/opt/apache-jmeter-5.4.3/bin/jmeter -n -t ./src/test/jmeter/petclinic_test_plan.jmx -l resultats.jtl -e -o ./report/'
+							 sh'rm -rf /usr/share/nginx/html/jmeter/* resultats.jtl'
+							 sh '/opt/apache-jmeter-5.4.3/bin/jmeter -n -t ./src/test/jmeter/petclinic_test_plan.jmx -l resultats.jtl -e -o /usr/share/nginx/html/jmeter'
 							 sh 'cat resultats.jtl'
 							 perfReport 'resultats.jtl'
 							}
@@ -122,7 +121,6 @@ pipeline {
 						 script {
 							 sh 'az login --service-principal --username c71d3f77-6487-4147-b9c7-38a9c128dc6d --password r2Cgk~6BAfKANin65nLNRGTrbbeXaHgRew --tenant be8e3d88-370c-4c79-8b37-c4efc1f6a6ee'
 							 sh 'az aks get-credentials --resource-group petclinic --name petclinic-aks --overwrite-existing'
-							 sh 'az aks install-cli'
 							 sh '/usr/local/bin/kubectl apply -f aks'
 							 sh 'rm -rf *'
 					
