@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: petclinic-aks
+spec:
+  replicas: 6
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+  minReadySeconds: 5
+  selector:
+    matchLabels:
+      app: petclinic-aks
+  template:
+    metadata:
+      labels:
+        app: petclinic-aks
+    spec:
+      containers:
+      - name: petclinic-aks
+        image: petclinic4acr.azurecr.io/petclinic-img:latest
+        ports:
+        - containerPort: 8080
+      restartPolicy: Always
