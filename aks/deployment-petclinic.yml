@@ -8,7 +8,6 @@ spec:
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-  minReadySeconds: 5
   selector:
     matchLabels:
       app: petclinic-aks
