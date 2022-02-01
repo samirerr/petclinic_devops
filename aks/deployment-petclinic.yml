@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: petclinic-aks
 spec:
-  replicas: 6
+  replicas: 4
   strategy:
     rollingUpdate:
       maxSurge: 25%
