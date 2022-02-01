@@ -21,4 +21,3 @@ spec:
         image: petclinic4acr.azurecr.io/petclinic-img:latest
         ports:
         - containerPort: 8080
-      restartPolicy: Always
