@@ -1,14 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  labels:
-    app: petclinic-aks
-  name: petclinic-svc
+  name: petclinic-aks-loadbalancer
 spec:
   type: LoadBalancer
   ports:
   - port: 8080
-    targetPort: 8080
   selector:
     app: petclinic-aks
   
