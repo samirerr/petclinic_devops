@@ -515,25 +515,7 @@
                 </dependency>
             </dependencies>
         </profile>
-        <profile>
-            <id>PostgreSQL</id>
-            <properties>
-                <db.script>postgresql</db.script>
-                <jpa.database>POSTGRESQL</jpa.database>
-                <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:postgresql://</jdbc.url>
-                <jdbc.username></jdbc.username>
-                <jdbc.password></jdbc.password>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>org.postgresql</groupId>
-                    <artifactId>postgresql</artifactId>
-                    <version>${postgresql-driver.version}</version>
-                    <scope>runtime</scope>
-                </dependency>
-            </dependencies>
-        </profile>
+        
    </profiles>
 
     <repositories>
