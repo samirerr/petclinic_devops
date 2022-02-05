@@ -16,3 +16,17 @@ mvn clean deploy -DskipTests -Ddburl=$dburl -Ddbusername=$dbusername -Ddbpasswor
 
 
 <a href=''><img src='https://github.com/samirerr/petclinic/blob/master/images/architecture.jpg?raw=true'></a>
+
+
+# Deploiement de ressources Azure avec Terraform
+
+```
+terraform init
+terraform plan -out main.tfplan
+terraform apply main.tfplan
+```
+
+# Installation et configuration des outils avec Ansible
+```
+ansible-playbook playbook.ymk -K
+```
