@@ -10,7 +10,7 @@ mvn clean deploy -DskipTests -Ddburl=$dburl -Ddbusername=$dbusername -Ddbpasswor
 ```
  
 
-<a href=''><img src='https://cloud.githubusercontent.com/assets/838318/19727082/2aee6d6c-9b8e-11e6-81fe-e889a5ddfded.png'></a>
+<a href=''><img src='https://github.com/samirerr/petclinic/blob/master/images/architecture.jpg?raw=true'></a>
 
 # Architechture DevOps proposée
 
