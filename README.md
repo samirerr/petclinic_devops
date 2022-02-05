@@ -32,3 +32,6 @@ ansible-playbook playbook.ymk -K
 
 # Slack
 <a href=''><img src='https://github.com/samirerr/petclinic/blob/master/images/screen-slack.jpg?raw=true'></a>
+
+# Tableau Kanban
+<a href=''><img src='https://github.com/samirerr/petclinic_devops/blob/master/images/tableau_kanban.jpg?raw=true'></a>
