@@ -9,7 +9,7 @@ Petclinic est une application Spring Boot construite à l'aide de Maven. Vous po
 mvn clean deploy -DskipTests -Ddburl=$dburl -Ddbusername=$dbusername -Ddbpassword=$dbpassword
 ```
  
-
+<a href=''><img src='https://github.com/samirerr/petclinic/blob/master/images/appli_petclinic.png?raw=true'></a>
 
 
 # Architechture DevOps proposée
