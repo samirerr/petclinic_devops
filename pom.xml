@@ -521,9 +521,9 @@
                 <db.script>postgresql</db.script>
                 <jpa.database>POSTGRESQL</jpa.database>
                 <jdbc.driverClassName>org.postgresql.Driver</jdbc.driverClassName>
-                <jdbc.url>jdbc:postgresql://petclinic-server.postgres.database.azure.com:5432/petclinic</jdbc.url>
-                <jdbc.username>petclinic</jdbc.username>
-                <jdbc.password>Groupe123</jdbc.password>
+                <jdbc.url>jdbc:postgresql://</jdbc.url>
+                <jdbc.username></jdbc.username>
+                <jdbc.password></jdbc.password>
             </properties>
             <dependencies>
                 <dependency>
