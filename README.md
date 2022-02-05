@@ -1,5 +1,5 @@
 # petclinic
-[![Build Status](http://samirer.freeboxos.fr:8080/buildStatus/icon?job=Petclinic-DC)](http://samirer.freeboxos.fr:8080/job/Petclinic-DC/)
+
 
 
 # Exécution de l'application Petclinic localement
