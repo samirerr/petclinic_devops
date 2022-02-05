@@ -1,0 +1,33 @@
+---
+- name: creer le dossier de service unit de grafana
+  file:
+    name: "/etc/systemd/system/grafana-server.service.d"
+    state: directory
+
+- name: creer une service unit pour grafana
+  template:
+    src: grafana.systemd.j2
+    dest: "/etc/systemd/system/grafana-server.service.d/settings.conf"
+  notify: reload systemd and restart grafana
+
+- name: Configurer Grafana
+  template:
+    src: grafana.ini.j2
+    dest: /etc/grafana/grafana.ini
+    owner: "root"
+    group: "{{ grafana_group }}"
+    mode: 0640
+  notify: restart grafana
+
+- name: autoriser le port 3000 sur le firewalld
+  firewalld:
+    zone: public
+    port: 3000/tcp
+    permanent: yes
+    state: enabled
+
+
+- name: redemarrer service firewalld
+  systemd:
+    name: firewalld
+    state: reloaded

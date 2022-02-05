@@ -1,0 +1,33 @@
+- name: enregistrer le token d'accès
+  shell: 'sudo cat /var/lib/jenkins/secrets/initialAdminPassword'
+  register: admin_auth_token
+  until: admin_auth_token is success
+  retries: 6
+  delay: 8
+
+- name: ouvrir une session en tant qu'admin
+  uri:
+    url: 'http://localhost:{{ jenkins_port }}/crumbIssuer/api/xml?xpath=concat(//crumbRequestField,":",//crumb)'
+    user: admin
+    password: '{{ admin_auth_token.stdout }}'
+    force_basic_auth: yes
+    return_content: yes
+  register: crumb
+  until: crumb is success
+  retries: 6
+  delay: 8
+
+
+- name: envoyer une requette post pour creer l'user et mdp
+  uri:
+    method: POST
+    url: 'http://localhost:{{ jenkins_port }}/securityRealm/createAccountByAdmin'
+    user: admin
+    password: '{{ admin_auth_token.stdout }}'
+    force_basic_auth: yes
+    follow_redirects: all
+    headers:
+      Jenkins-Crumb: '{{ crumb.content.split(":")[1] }}'
+      Cookie: '{{ crumb.set_cookie }}'
+    # body: 'username=user2&password1=pass&password2=pass&fullname=fullname&email=bubba%40dummy.bg'
+    body: 'username={{ jenkins_user }}&password1={{ jenkins_pass }}&password2={{ jenkins_pass }}&fullname={{ jenkins_fullname }}&email={{ jenkins_email }}'

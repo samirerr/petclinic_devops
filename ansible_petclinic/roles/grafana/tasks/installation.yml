@@ -1,0 +1,38 @@
+---
+
+- name: ajouter le repos grafana
+  yum_repository:
+    name: "{{ grafana_install_repo['name'] }}"
+    description: "{{ grafana_install_repo['name'] }}"
+    baseurl: "{{ grafana_install_repo['yum_repo'] }}"
+    gpgkey: "{{ grafana_install_repo['yum_gpg_key'] | default(omit) }}"
+    gpgcheck: "{{ grafana_install_repo['yum_gpg_check'] | default(False) }}"
+    state: present
+
+- name: creer le group d'utilisateur grafana
+  group:
+    name: "{{ grafana_group }}"
+    system: true
+    state: present
+
+- name: creer l'utilisateur grafana
+  user:
+    name: "{{ grafana_user }}"
+    group: "{{ grafana_group }}"
+    system: yes
+    createhome: no
+    state: present
+
+- name: installer les dependances de grafana
+  package:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "fontconfig"
+    - "freetype*"
+    - "urw-fonts"
+
+- name: Installer Grafana
+  package:
+    name: grafana
+    state: present

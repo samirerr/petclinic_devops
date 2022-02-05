@@ -1,0 +1,11 @@
+---
+- name: installation d'outils pour la pipeline PetClinic
+  become: yes
+  hosts: petclinic
+  roles:
+    - java
+    - jenkins
+    - maven
+    - docker
+    - grafana
+    - sonar

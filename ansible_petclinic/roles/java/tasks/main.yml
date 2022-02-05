@@ -1,0 +1,6 @@
+---
+- name: Installer la dependance Java-11
+  package:
+    name: '{{ java_version }}'
+    state: present
+

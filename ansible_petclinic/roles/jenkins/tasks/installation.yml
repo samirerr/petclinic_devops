@@ -1,0 +1,43 @@
+---
+- name: Ajouter le repos jenkins 
+  when: ansible_os_family == "RedHat"
+  yum_repository:
+    name: jenkins-stable
+    description: Jenkins CI Stable
+    baseurl: "{{ jenkins_yum_repo }}"
+    gpgkey: "{{ jenkins_yum_key_url }}"
+    gpgcheck: yes
+
+- name: Installer Jenkins 
+  when: ansible_os_family == "RedHat"
+  register: jenkins_installed
+  yum:
+    name: "{{ jenkins_yum_package }}"
+    state: present
+    nobest: yes
+    update_cache: yes
+
+- name: vérifier si le paquet s'est bien installé (CentOS/RedHat)
+  when: ansible_os_family == "RedHat"
+  set_fact:
+    task_install_changed: jenkins_installed.changed
+
+- name: démarrer le service jenkins
+  systemd:
+    name: jenkins
+    state: started
+    enabled: yes
+
+- name: autoriser le port 8080 sur le firewalld
+  firewalld:
+    zone: public
+    port: 8080/tcp
+    permanent: yes
+    state: enabled
+
+
+- name: redemarrer service firewalld
+  systemd:
+    name: firewalld
+    state: reloaded
+

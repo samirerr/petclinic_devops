@@ -1,0 +1,9 @@
+---
+- include_tasks: installation.yml
+- include_tasks: configuration.yml
+
+- name: demarrer grafana et rendre le service actif au démarrer
+  service:
+    name: grafana-server
+    state: started
+    enabled: true

@@ -1,0 +1,5 @@
+---
+#- include_tasks: install.yml
+- include_tasks: installation.yml
+- include_tasks: configuration.yml
+- include_tasks: plugins.yml

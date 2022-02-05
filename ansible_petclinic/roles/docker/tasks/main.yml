@@ -1,0 +1,16 @@
+- include_tasks: installation.yml
+- include_tasks: docker-compose.yml
+- include_tasks: docker-user.yml
+
+- name: Installer Docker.
+  package:
+    name: "{{ docker_package }}"
+    state: "{{ docker_package_state }}"
+  notify: restart docker
+
+- name: verifier si docker est démarré et activé au démarrage de système.
+  service:
+    name: docker
+    state: "{{ docker_service_state }}"
+    enabled: "{{ docker_service_enabled }}"
+  ignore_errors: "{{ ansible_check_mode }}"

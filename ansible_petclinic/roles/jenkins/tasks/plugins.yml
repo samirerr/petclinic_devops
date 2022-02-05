@@ -1,0 +1,7 @@
+- name: Install plugin
+  community.general.jenkins_plugin:
+    name: build-pipeline-plugin
+    url_username: '{{ jenkins_user }}'
+    url_password: '{{ jenkins_pass }}'
+    url: http://localhost:8080
+
