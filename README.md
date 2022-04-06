@@ -27,7 +27,7 @@ terraform apply main.tfplan
 
 # Installation et configuration des outils avec Ansible
 ```
-ansible-playbook playbook.ymk -K
+ansible-playbook playbook.yml -K
 ```
 
 # Slack
